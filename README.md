@@ -41,7 +41,7 @@ data/
   threads/{id}/     full thread JSON, grouped by forum
   members/          member profiles
   attachments/      content-addressed attachment files
-  cache/            raw HTML cache
+  .cache/           raw HTML cache
 ```
 
 The output data can be dropped into the [castro](https://github.com/idleberg/castro) directory for beautiful rendering. Try this [example forum](https://idleberg.github.io/castro/).

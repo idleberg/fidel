@@ -19,7 +19,7 @@ function buildDirs(outDir: string): Dirs {
 		threads: join(outDir, 'threads'),
 		members: join(outDir, 'members'),
 		attachments: join(outDir, 'attachments'),
-		cache: join(outDir, 'cache'),
+		cache: join(outDir, '.cache'),
 	};
 }
 

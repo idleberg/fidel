@@ -2,6 +2,10 @@
 
 > A forum scraper built on Playwright, designed to archive vBulletin-based forums, such as the Winamp forum.
 
+![License](https://img.shields.io/npm/l/@idleberg/fidel?style=for-the-badge)
+[![Version](https://img.shields.io/npm/v/@idleberg/fidel?style=for-the-badge)](https://www.npmjs.org/package/@idleberg/fidel)
+[![Build](https://img.shields.io/github/actions/workflow/status/idleberg/fidel/ci.yml?style=for-the-badge)](https://github.com/idleberg/fidel/actions)
+
 ## Features
 
 - **Cloudflare bypass** – stealth-mode Playwright with automatic challenge detection and retries

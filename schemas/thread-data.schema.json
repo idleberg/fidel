@@ -1,5 +1,5 @@
 {
-	"$id": "https://idleberg.github.io/fidel/schemas/thread-data.schema.json",
+	"$id": "https://raw.githubusercontent.com/idleberg/fidel/v1/schemas/thread-data.schema.json",
 	"type": "object",
 	"properties": {
 		"$schema": {

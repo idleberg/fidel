@@ -1,6 +1,6 @@
 import * as v from 'valibot';
 
-export const SCHEMA_BASE_URL = 'https://idleberg.github.io/fidel/schemas';
+export const SCHEMA_BASE_URL = 'https://raw.githubusercontent.com/idleberg/fidel/v1/schemas';
 
 export const AttachmentSchema = v.object({
 	id: v.number(),

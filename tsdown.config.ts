@@ -5,6 +5,7 @@ export default defineConfig((options) => {
 
 	return {
 		target: 'node24',
+		banner: { js: '#!/usr/bin/env node' },
 		clean: isProduction,
 		dts: isProduction,
 		entry: ['src/cli.ts'],

@@ -1,8 +1,9 @@
 # build output
 bin/
 
-# generated types
+# generated files
 .astro/
+tsconfig.tsbuildinfo
 
 # dependencies
 node_modules/

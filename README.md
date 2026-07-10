@@ -44,6 +44,8 @@ data/
   cache/            raw HTML cache
 ```
 
+The output data can be dropped into the [castro](https://github.com/idleberg/castro) directory for beautiful rendering. Try this [example forum](https://idleberg.github.io/castro/).
+
 ## License
 
 This work is licensed under the [MIT License](LICENSE).

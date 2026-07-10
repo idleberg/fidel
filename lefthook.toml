@@ -1,0 +1,8 @@
+[pre-commit.commands.lint]
+run = "pnpm exec oxlint --fix {staged_files}"
+glob = "*.{js,mjs,cjs,ts,mts,cts}"
+stage_fixed = true
+
+[pre-commit.commands.format]
+run = "pnpm exec oxfmt --write --no-error-on-unmatched-pattern {staged_files}"
+stage_fixed = true

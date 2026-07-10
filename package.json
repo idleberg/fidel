@@ -1,0 +1,52 @@
+{
+	"name": "@idleberg/fidel",
+	"private": true,
+	"description": "Winamp forum scraper",
+	"license": "MIT",
+	"bin": {
+		"fidel": "./bin/cli.mjs"
+	},
+	"type": "module",
+	"exports": {
+		"./schemas": "./src/lib/schemas.ts",
+		"./schemas/*.json": "./schemas/*.schema.json"
+	},
+	"scripts": {
+		"build:code": "tsdown",
+		"build:schema": "node src/generate-schemas.ts",
+		"build": "concurrently --prefix-colors cyan,magenta npm:build:*",
+		"check": "oxlint && oxfmt --check",
+		"dev": "tsdown --watch",
+		"format": "oxfmt",
+		"lint": "oxlint",
+		"postinstall": "playwright install --with-deps chromium"
+	},
+	"dependencies": {
+		"@valibot/to-json-schema": "^1.0.0",
+		"commander": "^15.0.0",
+		"kleur": "^4.1.5",
+		"log-symbols": "^7.0.1",
+		"playwright": "^1.61.1",
+		"playwright-extra": "^4.3.6",
+		"puppeteer-extra-plugin-stealth": "^2.11.2",
+		"rehype-parse": "^9.0.1",
+		"rehype-sanitize": "^6.0.0",
+		"rehype-stringify": "^10.0.1",
+		"unified": "^11.0.5",
+		"unist-util-visit": "^5.1.0",
+		"valibot": "^1.0.0"
+	},
+	"devDependencies": {
+		"@types/hast": "^3.0.4",
+		"@types/node": "^26.1.0",
+		"concurrently": "^10.0.3",
+		"oxfmt": "^0.58.0",
+		"oxlint": "^1.73.0",
+		"tsdown": "^0.22.4",
+		"typescript": "^7.0.2"
+	},
+	"engines": {
+		"node": ">=24"
+	},
+	"packageManager": "pnpm@11.10.0+sha512.0b7f8b98060031904c017e3a41eb187a16d40eeb829b95c4f8cb03681761fc4ab53dd219115b9b447f4dce1a05a214764461e7d3703392a9f32f9511ce8c86c8"
+}

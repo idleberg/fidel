@@ -1,0 +1,46 @@
+{
+  "$id": "https://idleberg.github.io/fidel/schemas/member-data.schema.json",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri"
+    },
+    "url": {
+      "type": "string"
+    },
+    "id": {
+      "type": "number"
+    },
+    "name": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "joinDate": {
+      "type": "string"
+    },
+    "lastActivity": {
+      "type": "string"
+    },
+    "totalPosts": {
+      "type": "number"
+    },
+    "location": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "$schema",
+    "url",
+    "id",
+    "name",
+    "title",
+    "joinDate",
+    "lastActivity",
+    "totalPosts",
+    "location"
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

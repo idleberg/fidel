@@ -1,96 +1,75 @@
 {
-  "$id": "https://idleberg.github.io/fidel/schemas/thread-data.schema.json",
-  "type": "object",
-  "properties": {
-    "$schema": {
-      "type": "string",
-      "format": "uri"
-    },
-    "url": {
-      "type": "string"
-    },
-    "title": {
-      "type": "string"
-    },
-    "totalPages": {
-      "type": "number"
-    },
-    "posts": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "title": {
-            "type": "string"
-          },
-          "body": {
-            "type": "string"
-          },
-          "author": {
-            "type": "string"
-          },
-          "authorId": {
-            "type": "number"
-          },
-          "created": {
-            "type": "string"
-          },
-          "updated": {
-            "type": "string"
-          },
-          "attachments": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "number"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "size": {
-                  "type": "string"
-                },
-                "views": {
-                  "type": "number"
-                },
-                "url": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "id",
-                "name",
-                "size",
-                "views",
-                "url"
-              ]
-            }
-          }
-        },
-        "required": [
-          "id",
-          "title",
-          "body",
-          "author",
-          "authorId",
-          "created",
-          "updated",
-          "attachments"
-        ]
-      }
-    }
-  },
-  "required": [
-    "$schema",
-    "url",
-    "title",
-    "totalPages",
-    "posts"
-  ],
-  "$schema": "http://json-schema.org/draft-07/schema#"
+	"$id": "https://idleberg.github.io/fidel/schemas/thread-data.schema.json",
+	"type": "object",
+	"properties": {
+		"$schema": {
+			"type": "string",
+			"format": "uri"
+		},
+		"url": {
+			"type": "string"
+		},
+		"title": {
+			"type": "string"
+		},
+		"totalPages": {
+			"type": "number"
+		},
+		"posts": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "number"
+					},
+					"title": {
+						"type": "string"
+					},
+					"body": {
+						"type": "string"
+					},
+					"author": {
+						"type": "string"
+					},
+					"authorId": {
+						"type": "number"
+					},
+					"created": {
+						"type": "string"
+					},
+					"updated": {
+						"type": "string"
+					},
+					"attachments": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "number"
+								},
+								"name": {
+									"type": "string"
+								},
+								"size": {
+									"type": "string"
+								},
+								"views": {
+									"type": "number"
+								},
+								"url": {
+									"type": "string"
+								}
+							},
+							"required": ["id", "name", "size", "views", "url"]
+						}
+					}
+				},
+				"required": ["id", "title", "body", "author", "authorId", "created", "updated", "attachments"]
+			}
+		}
+	},
+	"required": ["$schema", "url", "title", "totalPages", "posts"],
+	"$schema": "http://json-schema.org/draft-07/schema#"
 }

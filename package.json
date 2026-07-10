@@ -13,7 +13,7 @@
 	},
 	"scripts": {
 		"build:code": "tsdown",
-		"build:schema": "node src/generate-schemas.ts",
+		"build:schema": "node src/generate-schemas.ts && pnpm format",
 		"build": "concurrently --prefix-colors cyan,magenta npm:build:*",
 		"check": "oxlint && oxfmt --check",
 		"dev": "tsdown --watch",

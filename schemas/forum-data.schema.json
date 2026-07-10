@@ -1,88 +1,81 @@
 {
-  "$id": "https://idleberg.github.io/fidel/schemas/forum-data.schema.json",
-  "type": "object",
-  "properties": {
-    "$schema": {
-      "type": "string",
-      "format": "uri"
-    },
-    "url": {
-      "type": "string"
-    },
-    "name": {
-      "type": "string"
-    },
-    "channelId": {
-      "type": "number"
-    },
-    "isRoot": {
-      "type": "boolean"
-    },
-    "totalPages": {
-      "type": "number"
-    },
-    "threads": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "url": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "startedBy": {
-            "type": "string"
-          },
-          "createdDate": {
-            "type": "string"
-          },
-          "modifiedDate": {
-            "type": "string"
-          },
-          "nodeId": {
-            "type": "number"
-          },
-          "responses": {
-            "type": "number"
-          },
-          "views": {
-            "type": "number"
-          },
-          "sticky": {
-            "type": "boolean"
-          },
-          "closed": {
-            "type": "boolean"
-          },
-          "forumPage": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "url",
-          "title",
-          "startedBy",
-          "createdDate",
-          "modifiedDate",
-          "nodeId",
-          "responses",
-          "views",
-          "sticky",
-          "closed",
-          "forumPage"
-        ]
-      }
-    }
-  },
-  "required": [
-    "$schema",
-    "url",
-    "name",
-    "channelId",
-    "totalPages",
-    "threads"
-  ],
-  "$schema": "http://json-schema.org/draft-07/schema#"
+	"$id": "https://idleberg.github.io/fidel/schemas/forum-data.schema.json",
+	"type": "object",
+	"properties": {
+		"$schema": {
+			"type": "string",
+			"format": "uri"
+		},
+		"url": {
+			"type": "string"
+		},
+		"name": {
+			"type": "string"
+		},
+		"channelId": {
+			"type": "number"
+		},
+		"isRoot": {
+			"type": "boolean"
+		},
+		"totalPages": {
+			"type": "number"
+		},
+		"threads": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"url": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"startedBy": {
+						"type": "string"
+					},
+					"createdDate": {
+						"type": "string"
+					},
+					"modifiedDate": {
+						"type": "string"
+					},
+					"nodeId": {
+						"type": "number"
+					},
+					"responses": {
+						"type": "number"
+					},
+					"views": {
+						"type": "number"
+					},
+					"sticky": {
+						"type": "boolean"
+					},
+					"closed": {
+						"type": "boolean"
+					},
+					"forumPage": {
+						"type": "number"
+					}
+				},
+				"required": [
+					"url",
+					"title",
+					"startedBy",
+					"createdDate",
+					"modifiedDate",
+					"nodeId",
+					"responses",
+					"views",
+					"sticky",
+					"closed",
+					"forumPage"
+				]
+			}
+		}
+	},
+	"required": ["$schema", "url", "name", "channelId", "totalPages", "threads"],
+	"$schema": "http://json-schema.org/draft-07/schema#"
 }

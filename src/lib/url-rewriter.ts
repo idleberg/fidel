@@ -5,8 +5,9 @@ import { join } from 'node:path';
 import logSymbols from 'log-symbols';
 import type { Page } from 'playwright';
 
-import { findOldForumById, findOldForumByName } from './wayback.ts';
+import { SCHEMA_BASE_URL } from './schemas.ts';
 import { jsonStringify, pl, sleep } from './utils.ts';
+import { findOldForumById, findOldForumByName } from './wayback.ts';
 
 export class UrlRewriter {
 	private urlMap: Record<string, string> = {};
@@ -63,7 +64,8 @@ export class UrlRewriter {
 
 	async save(): Promise<void> {
 		if (this.dirty) {
-			await writeFile(this.mapPath, jsonStringify(this.urlMap, this.minify), 'utf-8');
+			const obj = { $schema: `${SCHEMA_BASE_URL}/url-map.schema.json`, ...this.urlMap };
+			await writeFile(this.mapPath, jsonStringify(obj, this.minify), 'utf-8');
 			this.dirty = false;
 		}
 	}

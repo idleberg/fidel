@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import logSymbols from 'log-symbols';
 import type { Page } from 'playwright';
 
+import { SCHEMA_BASE_URL } from './schemas.ts';
 import { jsonStringify } from './utils.ts';
 
 export class AttachmentStore {
@@ -80,7 +81,9 @@ export class AttachmentStore {
 
 	async save(): Promise<void> {
 		if (!this.dirty) return;
-		const obj: Record<string, string> = {};
+		const obj: Record<string, string> = {
+			$schema: `${SCHEMA_BASE_URL}/attachment-index.schema.json`,
+		};
 		for (const [id, hash] of this.index) {
 			obj[String(id)] = hash;
 		}

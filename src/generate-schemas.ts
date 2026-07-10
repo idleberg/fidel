@@ -3,7 +3,14 @@ import { join } from 'node:path';
 
 import { toJsonSchema } from '@valibot/to-json-schema';
 
-import { ForumDataSchema, ThreadDataSchema, MemberDataSchema, SCHEMA_BASE_URL } from './lib/schemas.ts';
+import {
+	ForumDataSchema,
+	ThreadDataSchema,
+	MemberDataSchema,
+	AttachmentIndexSchema,
+	UrlMapSchema,
+	SCHEMA_BASE_URL,
+} from './lib/schemas.ts';
 
 const SCHEMAS_DIR = join(process.cwd(), 'schemas');
 
@@ -11,6 +18,8 @@ const schemas = [
 	['forum-data.schema.json', ForumDataSchema],
 	['thread-data.schema.json', ThreadDataSchema],
 	['member-data.schema.json', MemberDataSchema],
+	['attachment-index.schema.json', AttachmentIndexSchema],
+	['url-map.schema.json', UrlMapSchema],
 ] as const;
 
 await mkdir(SCHEMAS_DIR, { recursive: true });

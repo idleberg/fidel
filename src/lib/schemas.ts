@@ -65,6 +65,16 @@ export const MemberDataSchema = v.object({
 	location: v.string(),
 });
 
+export const AttachmentIndexSchema = v.intersect([
+	v.object({ $schema: v.pipe(v.string(), v.url()) }),
+	v.record(v.pipe(v.string(), v.digits()), v.pipe(v.string(), v.hexadecimal(), v.length(64))),
+]);
+
+export const UrlMapSchema = v.intersect([
+	v.object({ $schema: v.pipe(v.string(), v.url()) }),
+	v.record(v.string(), v.string()),
+]);
+
 export type Attachment = v.InferOutput<typeof AttachmentSchema>;
 export type Post = v.InferOutput<typeof PostSchema>;
 export type ThreadRef = v.InferOutput<typeof ThreadRefSchema>;

@@ -1,0 +1,29 @@
+{
+	"$id": "https://raw.githubusercontent.com/idleberg/fidel/v1/schemas/attachment-index.schema.json",
+	"allOf": [
+		{
+			"type": "object",
+			"properties": {
+				"$schema": {
+					"type": "string",
+					"format": "uri"
+				}
+			},
+			"required": ["$schema"]
+		},
+		{
+			"type": "object",
+			"propertyNames": {
+				"type": "string",
+				"pattern": "^\\d+$"
+			},
+			"additionalProperties": {
+				"type": "string",
+				"pattern": "^(?:0[hx])?[\\da-fA-F]+$",
+				"minLength": 64,
+				"maxLength": 64
+			}
+		}
+	],
+	"$schema": "http://json-schema.org/draft-07/schema#"
+}

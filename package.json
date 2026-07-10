@@ -23,7 +23,8 @@
 		"dev": "tsdown --watch",
 		"format": "oxfmt",
 		"lint": "oxlint",
-		"postinstall": "playwright install --with-deps chromium"
+		"postinstall": "playwright install --with-deps chromium",
+		"prepublishOnly": "pnpm build"
 	},
 	"dependencies": {
 		"@valibot/to-json-schema": "^1.0.0",

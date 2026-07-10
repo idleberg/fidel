@@ -6,6 +6,10 @@
 	"bin": {
 		"fidel": "./bin/cli.mjs"
 	},
+	"files": [
+		"bin",
+		"schemas"
+	],
 	"type": "module",
 	"exports": {
 		"./schemas": "./src/lib/schemas.ts",

@@ -1,21 +1,19 @@
 # @idleberg/fidel
 
-A forum scraper built on Playwright, designed to archive vBulletin-based forums. It discovers sub-forums, threads, and member profiles automatically, then writes structured JSON to disk.
+> A forum scraper built on Playwright, designed to archive vBulletin-based forums, such as the Winamp forum.
 
 ## Features
 
-- **Cloudflare bypass** -- uses stealth-mode Playwright with realistic browser fingerprinting; detects challenge pages and retries automatically
-- **HTML sanitization** -- strips forum chrome, normalizes BBCode containers to semantic HTML, replaces smileys with emoji, and rewrites internal links to local cross-references
-- **Attachment handling** -- three modes: download to content-addressed storage (SHA-256 deduplicated), metadata-only, or ignore entirely
-- **Concurrency** -- parallel browser pages with configurable worker pool and per-request throttling
-- **Disk cache** -- every fetched page is cached locally; subsequent runs serve cached HTML directly into the browser via route interception, skipping the network
-- **Resumable** -- skips forums, threads, and members that already exist on disk, so interrupted runs pick up where they left off
-- **URL rewriting** -- resolves legacy `showthread.php` / `forumdisplay.php` links to their modern equivalents, rewrites cross-references to local paths, and falls back to Wayback Machine URLs for dead links
-- **Typed schemas** -- Valibot schemas for all data types, with generated JSON Schema files available for downstream consumers
+- **Cloudflare bypass** – stealth-mode Playwright with automatic challenge detection and retries
+- **HTML sanitization** – strips forum chrome, normalizes BBCode to semantic HTML, replaces smileys with emoji
+- **Attachment handling** – download (SHA-256 deduplicated), metadata-only, or ignore
+- **Concurrency** – parallel browser pages with configurable throttling
+- **Disk cache** – cached HTML served via route interception, skipping the network on re-runs
+- **Resumable** – skips already-scraped forums, threads, and members
+- **URL rewriting** – resolves legacy vBulletin links, rewrites cross-references to local paths, falls back to Wayback Machine
+- **Typed schemas** – Valibot schemas with generated JSON Schema files for downstream consumers
 
 ## Installation
-
-Requires Node.js >= 24.
 
 ```sh
 npm install --global @idleberg/fidel
@@ -40,14 +38,6 @@ data/
   members/          member profiles
   attachments/      content-addressed attachment files
   cache/            raw HTML cache
-```
-
-## Schemas
-
-Valibot schemas are exported at runtime via `@idleberg/fidel/schemas`. Generated JSON Schema files are available in the `schemas/` directory.
-
-```sh
-pnpm build:schema
 ```
 
 ## License

@@ -43,4 +43,3 @@ data/
 ## License
 
 This work is licensed under the [MIT License](LICENSE).
-

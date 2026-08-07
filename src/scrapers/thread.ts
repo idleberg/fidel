@@ -6,7 +6,7 @@ import logSymbols from 'log-symbols';
 import type { Page } from 'playwright';
 
 import { navigateWithRetry } from '../lib/browser.ts';
-import { sanitizeHtml } from '../lib/sanitize.ts';
+import { sanitizeHtml, type ExtractedAttachment } from '../lib/sanitize.ts';
 import { selectors } from '../lib/selectors.ts';
 import { SCHEMA_BASE_URL } from '../lib/schemas.ts';
 import type { ScrapeContext, ThreadData, Post } from '../lib/types.ts';
@@ -87,6 +87,31 @@ function extractPosts(page: Page) {
 
 type RawPost = Awaited<ReturnType<typeof extractPosts>>[number];
 
+// The "Attached Files" block can live either beside the post body or inside it, in which
+// case both the DOM query and the body sanitizer pick it up. Merge those into one entry.
+function dedupeAttachments(attachments: ExtractedAttachment[]): ExtractedAttachment[] {
+	const byKey = new Map<string, ExtractedAttachment>();
+
+	for (const att of attachments) {
+		const key = att.id ? `id:${att.id}` : `name:${att.name.toLowerCase()}`;
+		const existing = byKey.get(key);
+
+		byKey.set(
+			key,
+			existing
+				? {
+						id: existing.id || att.id,
+						name: existing.name || att.name,
+						size: existing.size === '' ? att.size : existing.size,
+						views: Math.max(existing.views, att.views),
+					}
+				: att,
+		);
+	}
+
+	return [...byKey.values()];
+}
+
 function processPosts(rawPosts: RawPost[], ctx: ScrapeContext, page: Page): Promise<Post[]> {
 	const ignoreAttachments = !ctx.config.attachments;
 
@@ -104,7 +129,7 @@ function processPosts(rawPosts: RawPost[], ctx: ScrapeContext, page: Page): Prom
 				};
 			}
 
-			const allAttachments = [...attachments, ...sanitized.attachments];
+			const allAttachments = dedupeAttachments([...attachments, ...sanitized.attachments]);
 
 			const attachmentUrls = new Map<number, string>();
 			for (const att of allAttachments) {
@@ -115,15 +140,21 @@ function processPosts(rawPosts: RawPost[], ctx: ScrapeContext, page: Page): Prom
 				}
 			}
 
+			const seenUrls = new Set<string>();
+			const resolved = allAttachments
+				.map((att) => ({
+					...att,
+					url: attachmentUrls.get(att.id) ?? `https://forums.winamp.com/filedata/fetch?id=${att.id}`,
+				}))
+				// distinct ids can hash to the same file, and so to the same content-addressed path
+				.filter((att) => !seenUrls.has(att.url) && seenUrls.add(att.url));
+
 			return {
 				...rest,
 				body: ctx.urlRewriter.rewriteHtml(sanitized.body),
 				created: parseForumDate(_created),
 				updated: parseForumDate(_updated),
-				attachments: allAttachments.map((att) => ({
-					...att,
-					url: attachmentUrls.get(att.id) ?? `https://forums.winamp.com/filedata/fetch?id=${att.id}`,
-				})),
+				attachments: resolved,
 			};
 		}),
 	);

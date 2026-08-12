@@ -6,6 +6,7 @@ import logSymbols from 'log-symbols';
 import type { Page } from 'playwright';
 
 import { navigateWithRetry } from '../lib/browser.ts';
+import { fixMojibakeDeep } from '../lib/mojibake.ts';
 import { selectors } from '../lib/selectors.ts';
 import { SCHEMA_BASE_URL } from '../lib/schemas.ts';
 import type { ScrapeContext, ForumData, ThreadRef } from '../lib/types.ts';
@@ -194,7 +195,7 @@ export async function scrapeForum(ctx: ScrapeContext, forumUrl: string, isRoot =
 	const totalPages = maxPageFromPagination || startPage;
 
 	const seen = new Set<string>();
-	const data: ForumData = {
+	const data: ForumData = fixMojibakeDeep({
 		$schema: `${SCHEMA_BASE_URL}/forum-data.schema.json`,
 		url: forumUrl,
 		name: forumName,
@@ -206,7 +207,7 @@ export async function scrapeForum(ctx: ScrapeContext, forumUrl: string, isRoot =
 			seen.add(t.url);
 			return true;
 		}),
-	};
+	});
 
 	await writeFile(outPath, jsonStringify(data, ctx.config.minify), 'utf-8');
 	console.log(`  ${logSymbols.success} Saved ${pl(allThreads.length, 'thread')} → ${outPath}`);

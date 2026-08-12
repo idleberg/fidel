@@ -6,6 +6,7 @@ import logSymbols from 'log-symbols';
 import type { Page } from 'playwright';
 
 import { navigateWithRetry } from '../lib/browser.ts';
+import { fixMojibakeDeep } from '../lib/mojibake.ts';
 import { sanitizeHtml, type ExtractedAttachment } from '../lib/sanitize.ts';
 import { selectors } from '../lib/selectors.ts';
 import { SCHEMA_BASE_URL } from '../lib/schemas.ts';
@@ -234,14 +235,14 @@ export async function scrapeThread(
 		}
 	}
 
-	const data: ThreadData = {
+	const data: ThreadData = fixMojibakeDeep({
 		$schema: `${SCHEMA_BASE_URL}/thread-data.schema.json`,
 		url: threadUrl,
 		title,
 
 		totalPages,
 		posts: allPosts,
-	};
+	});
 
 	await writeFile(outPath, jsonStringify(data, ctx.config.minify), 'utf-8');
 	console.log(`  ${tag}${logSymbols.success} Saved ${pl(allPosts.length, 'post')} → ${outPath}`);

@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import logSymbols from 'log-symbols';
 
 import { navigateWithRetry } from '../lib/browser.ts';
+import { fixMojibakeDeep } from '../lib/mojibake.ts';
 import { selectors } from '../lib/selectors.ts';
 import { SCHEMA_BASE_URL } from '../lib/schemas.ts';
 import type { ScrapeContext, MemberData } from '../lib/types.ts';
@@ -63,7 +64,7 @@ export async function scrapeMember(ctx: ScrapeContext, memberId: number, tag = '
 		return { name, title, info, totalPosts };
 	}, evaluateSelectors);
 
-	const memberData: MemberData = {
+	const memberData: MemberData = fixMojibakeDeep({
 		$schema: `${SCHEMA_BASE_URL}/member-data.schema.json`,
 		url: memberUrl,
 		id: memberId,
@@ -74,7 +75,7 @@ export async function scrapeMember(ctx: ScrapeContext, memberId: number, tag = '
 		lastActivity: parseForumDate(data.info['Last Activity'] ?? data.info['Last Online'] ?? ''),
 		totalPosts: data.totalPosts,
 		location: data.info['Location'] ?? '',
-	};
+	});
 
 	await writeFile(outPath, jsonStringify(memberData, ctx.config.minify), 'utf-8');
 	console.log(`  ${tag}${logSymbols.success} Saved member ${memberData.name} → ${outPath}`);

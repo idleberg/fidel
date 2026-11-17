@@ -68,7 +68,15 @@ export async function scrape(config: Config): Promise<void> {
 			const threadsDir = threadsDirForForum(dirs.threads, forum.channelId);
 			await mkdir(threadsDir, { recursive: true });
 
-			const threadsToScrape = forum.threads.filter((t) => t.url).slice(0, config.maxThreads);
+			const threadsToScrape = forum.threads
+				.filter((t) => {
+					if (/\/\d+-/u.test(t.url)) return true;
+					console.log(
+						`  ${logSymbols.warning} Skipping non-thread URL in forum ${forum.channelId}: ${t.url || '(empty)'}`,
+					);
+					return false;
+				})
+				.slice(0, config.maxThreads);
 
 			const results = await runInBatches(threadsToScrape, concurrency, config.delayMs, async (thread, workerIndex) => {
 				const ctx = contexts[workerIndex];

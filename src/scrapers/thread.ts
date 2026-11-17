@@ -169,8 +169,8 @@ export async function scrapeThread(
 ): Promise<ThreadData> {
 	const { page, config } = ctx;
 
-	const idMatch = threadUrl.match(/\/(\d+)-/u);
-	const threadId = idMatch?.[1] ?? threadUrl.replaceAll(/[^a-z0-9]/giu, '_');
+	const threadId = threadUrl.match(/\/(\d+)-/u)?.[1];
+	if (!threadId) throw new Error(`No thread ID in URL: ${threadUrl}`);
 	const outPath = join(threadsDir, `${threadId}.json`);
 
 	ctx.urlRewriter.addLocalThread(threadId);

@@ -1,6 +1,6 @@
 {
 	"name": "@idleberg/fidel",
-	"version": "0.1.3",
+	"version": "0.1.4",
 	"description": "Winamp forum scraper",
 	"license": "MIT",
 	"bin": {
